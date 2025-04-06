@@ -54,5 +54,26 @@ namespace Translator.Tests
             // Assert
             Assert.Equal(enWord, translatedInEn);
         }
+
+        [Fact]
+        public void AddTranslation_HlebAndBread_TranslateFromEnglishToRussion()
+        {
+            // Arrange
+            var translator = new Translator();
+
+            string ruWord = "хлеб";
+            string ruLanguage = "ru";
+
+            string enWord = "bread";
+            string enLanguage = "en";
+
+
+            // Act
+            translator.AddTranslation(ruWord, ruLanguage, enWord, enLanguage);
+            string translatedInRu = translator.Translate(enWord, ruLanguage);
+
+            // Assert
+            Assert.Equal(ruWord, translatedInRu);
+        }
     }
 }
