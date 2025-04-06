@@ -14,6 +14,10 @@ namespace Translator
             {
                 return "hello";
             }
+            if (word =="merci" && targetLanguage == "fr") 
+            {
+                return "спасибо";
+            }
             return string.Empty;
         }
     }
