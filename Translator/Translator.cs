@@ -28,8 +28,23 @@ namespace Translator
          * Необохдимо создать запись пару в словаре*/
         public void AddTranslation(string firstWord, string firstLang, string secondWord, string secondLang)
         {
+            var key = (firstWord.ToLower(), firstLang.ToLower());
+            var reverseKey = (secondWord.ToLower(), secondLang.ToLower());
 
-            
+            // Добавляем прямой перевод
+            if (!_dictionary.ContainsKey(key))
+            {
+                _dictionary[key] = new Dictionary<string, string>();
+            }
+            _dictionary[key][secondLang.ToLower()] = secondWord;
+
+            // Добавляем обратный перевод
+            if (!_dictionary.ContainsKey(reverseKey))
+            {
+                _dictionary[reverseKey] = new Dictionary<string, string>();
+            }
+            _dictionary[reverseKey][firstLang.ToLower()] = firstWord;
+
         }
 
         /* Метод перевода слова
@@ -38,8 +53,6 @@ namespace Translator
         * результат - переведенное слово */
         public string Translate(string word, string targetLang)
         {
-            if ((word == "привет" && targetLang == "en") || (word == "merci" && targetLang == "ru"))
-            {
                 foreach (var entry in _dictionary)
                 {
                     if (entry.Key.word == word.ToLower())
@@ -50,13 +63,7 @@ namespace Translator
                         }
                     }
                 }
-            }
-           
-            if(word == "хлеб" && targetLang == "en")
-            {
-                return "bread";
-            }
-            return string.Empty;
+            return $"[Перевод не найден для '{word}' → '{targetLang}']";
         }
     }
 }
