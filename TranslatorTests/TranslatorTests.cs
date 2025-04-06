@@ -9,4 +9,17 @@ namespace Translator.Tests
             Assert.NotNull(translator);
         }
     }
+
+    public class TranslateTests
+    {
+        [Fact]
+        public void Translate_ReturnsHello_WhenInputIsPrivetAndLanguageIsEnglish()
+        {
+            var translator = new Translator();
+
+            string result = translator.Translate("привет", "en");
+
+            Assert.Equal("hello", result);
+        }
+    }
 }
