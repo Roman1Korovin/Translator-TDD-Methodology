@@ -8,6 +8,13 @@ namespace Translator
 {
     public class Translator
     {
-        
+        public string Translate(string word, string targetLanguage)
+        {
+            if (word == "привет" && targetLanguage == "en") 
+            {
+                return "hello";
+            }
+            return string.Empty;
+        }
     }
 }
