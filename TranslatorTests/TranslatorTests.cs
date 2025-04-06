@@ -27,11 +27,29 @@ namespace Translator.Tests
         {
             var translator = new Translator();
 
-            string result = translator.Translate("merci", "fr");
+            string result = translator.Translate("merci", "ru");
 
             Assert.Equal("спасибо", result);
         }
     }
+    [Fact]
+    public void AddTranslation_HlebAndBread_TranslateFromRussianToEnglish()
+    {
+        // Arrange
+        var translator = new Translator();
+
+        string ruWord = "хлеб";
+        string ruLanguage = "ru";
+
+        string enWord = "bread";
+        string enLanguage = "en";
 
 
+        // Act
+        translator.AddTranslation(ruWord, ruLanguage, enWord, enLanguage);
+        string translatedInEn = translator.Translate(ruWord, enLanguage);
+
+        // Assert
+        Assert.Equal(enWord, translatedInEn);
+    }
 }
