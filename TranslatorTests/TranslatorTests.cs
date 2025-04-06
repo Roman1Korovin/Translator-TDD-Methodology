@@ -1,4 +1,4 @@
-namespace TranslatorTests
+namespace Translator.Tests
 {
     public class TranslatorTests
     {
