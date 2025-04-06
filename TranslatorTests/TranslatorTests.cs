@@ -21,5 +21,15 @@ namespace Translator.Tests
 
             Assert.Equal("hello", result);
         }
+
+        [Fact]
+        public void Translate_ReturnsSpasibo_WhenInputIsMerciAndLanguageIsFrance()
+        {
+            var translator = new Translator();
+
+            string result = translator.Translate("merci", "fr");
+
+            Assert.Equal("спасибо", result);
+        }
     }
 }
