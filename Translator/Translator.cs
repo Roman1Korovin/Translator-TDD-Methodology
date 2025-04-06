@@ -8,6 +8,11 @@ namespace Translator
 {
     public class Translator
     {
+       /* 1 параметр - слово 
+        * 2 параметр - язык слова 
+        * 3 параметр - перевод слова 
+        * 4 парамтр - язык перевода слова
+        * Необохдимо создать запись пару в словаре*/
         public void AddTranslation(string firstWord, string firstLang, string secondWord, string secondLang)
         {
 
@@ -15,9 +20,9 @@ namespace Translator
         }
 
         /* Метод перевода слова
-* 1 параметр - слово, которое нужно переветси
-* 2 параметр - язык, на который нужно перевести
-* результат - переведенное слово */
+        * 1 параметр - слово, которое нужно переветси
+        * 2 параметр - язык, на который нужно перевести
+        * результат - переведенное слово */
         public string Translate(string word, string targetLanguage)
         {
             if (word == "привет" && targetLanguage == "en") 
