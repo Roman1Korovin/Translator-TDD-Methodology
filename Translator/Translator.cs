@@ -17,7 +17,7 @@ namespace Translator
             {
                 { ("привет", "ru"), new Dictionary<string, string> { { "en", "hello" } } },
                 { ("hello", "en"), new Dictionary<string, string> { { "ru", "привет" } } },
-                { ("merci", "fr"), new Dictionary<string, string> { { "ru", "спасибо" } } },
+                { ("merci", "fr"), new Dictionary<string, string> { { "ru", "спасибо" } } },           
             };
 
         }
@@ -66,22 +66,22 @@ namespace Translator
             }
         }
 
-            /* Метод перевода слова
-            * 1 параметр - слово, которое нужно переветси
-            * 2 параметр - язык, на который нужно перевести
-            * результат - переведенное слово */
-            public string Translate(string word, string targetLang)
+        /* Метод перевода слова
+        * 1 параметр - слово, которое нужно переветси
+        * 2 параметр - язык, на который нужно перевести
+        * результат - переведенное слово */
+        public string Translate(string word, string targetLang)
         {
-                foreach (var entry in _dictionary)
+            foreach (var entry in _dictionary)
+            {
+                if (entry.Key.word == word.ToLower())
                 {
-                    if (entry.Key.word == word.ToLower())
+                    if (entry.Value.TryGetValue(targetLang.ToLower(), out string translation))
                     {
-                        if (entry.Value.TryGetValue(targetLang.ToLower(), out string translation))
-                        {
-                            return translation;
-                        }
+                        return translation;
                     }
                 }
+            }
             return null;
         }
     }

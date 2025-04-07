@@ -80,7 +80,7 @@ namespace Translator.Tests
     public class RemoveTranslatationTests
     {
         [Fact]
-        public void RemoveTranslation_ReturnsNull_AfterRemovingHelloAndPrivet()
+        public void RemoveTranslation_ReturnsNull_ForForwardTranslate_AfterRemovingHelloAndPrivet()
         {
             // Arrange
             var translator = new Translator();
@@ -91,6 +91,23 @@ namespace Translator.Tests
             // Act
             translator.RemoveTranslation(word, wordLang, translationLang);
             var result = translator.Translate(word, translationLang);
+
+            // Assert
+            Assert.Null(result);
+        }
+        [Fact]
+        public void RemoveTranslation_ReturnsNull_ForReverseTranslate_AfterRemovingHelloAndPrivet()
+        {
+            // Arrange
+            var translator = new Translator();
+            var word = "hello";
+            var wordLang = "en";
+            var translationWord = "привет";
+            var translationLang = "ru";
+
+            // Act
+            translator.RemoveTranslation(word, wordLang, translationLang);
+            var result = translator.Translate(translationWord, wordLang);
 
             // Assert
             Assert.Null(result);
