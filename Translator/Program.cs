@@ -86,7 +86,7 @@ namespace TranslatorApp
                         // Показать переводы между текущим и целевым языком
                         Console.Clear();
                         outputWelcome();
-                        var translations = translator.GetTranslationsForTwoLanguages(currentLang, targetLang);
+                        var translations = translator.GetListTranslationsForTwoLanguages(currentLang, targetLang);
 
                         if (translations.Count > 0)
                         {

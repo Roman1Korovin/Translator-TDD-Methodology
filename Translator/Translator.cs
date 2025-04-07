@@ -16,6 +16,8 @@ namespace Translator
             _dictionary = new Dictionary<(string word, string lang), Dictionary<string, string>>
             {
                 { ("привет", "ru"), new Dictionary<string, string> { { "en", "hello" } } },
+                { ("мир", "ru"), new Dictionary<string, string> { { "en", "world" } } },
+                { ("друзья", "ru"), new Dictionary<string, string> { { "en", "friends" } } },
                 { ("hello", "en"), new Dictionary<string, string> { { "ru", "привет" } } },
                 { ("merci", "fr"), new Dictionary<string, string> { { "ru", "спасибо" } } },           
             };
@@ -49,14 +51,21 @@ namespace Translator
         //1 аргумент - 1 язык для поиска
         //2 аргумент - 2 язык для поиска
         //результат - список всех пар из словаря, совпадающих по языкам
-        public List<KeyValuePair<string, string>> GetTranslationsForTwoLanguages(string sourceLang, string targetLang)
+        public List<KeyValuePair<string, string>> GetListTranslationsForTwoLanguages(string sourceLang, string targetLang)
         {
-            var translations = new List<KeyValuePair<string, string>>
+            var translations = new List<KeyValuePair<string, string>>();
+
+
+            foreach (var entry in _dictionary)
             {
-            new KeyValuePair<string, string>("привет", "hello"),
-            new KeyValuePair<string, string>("мир", "world"),
-            new KeyValuePair<string, string>("друзья", "friends")
-            };
+                // Проверяем, что текущее слово на sourceLang имеет перевод на targetLang
+                if (entry.Key.lang == sourceLang.ToLower() && entry.Value.ContainsKey(targetLang.ToLower()))
+                {
+                    // Добавляем пару слов в результат
+                    translations.Add(new KeyValuePair<string, string>(entry.Key.word, entry.Value[targetLang.ToLower()]));
+                }
+            }
+
             return translations;
         }
 

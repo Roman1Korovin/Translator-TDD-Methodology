@@ -117,13 +117,13 @@ namespace Translator.Tests
     public class ShowAllTranslationsTests
     {
         [Fact]
-        public void GetTranslationListForTwoLanguages_ReturnsCorrectList()
+        public void GetListTranslationListForTwoLanguages_ReturnsCorrectList()
         {
             // Arrange
             var translator = new Translator();
 
             // Act
-            List<KeyValuePair<string, string>> translations = translator.GetTranslationsForTwoLanguages("ru", "en");
+            List<KeyValuePair<string, string>> translations = translator.GetListTranslationsForTwoLanguages("ru", "en");
 
             // Assert
             Assert.Equal(3, translations.Count);  // Убедимся, что вернулся список из 3 слов
