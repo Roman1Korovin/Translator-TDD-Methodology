@@ -64,7 +64,6 @@ namespace TranslatorApp
                         Console.WriteLine("Введите второе слово (перевод):");
                         var secondWord = Console.ReadLine();
 
-                        // Добавляем новый перевод, используя текущий и целевой язык
                         translator.AddTranslation(firstWord, currentLang, secondWord, targetLang);
                         Console.WriteLine($"Перевод {firstWord} на {targetLang} добавлен.");
                         break;
@@ -76,7 +75,6 @@ namespace TranslatorApp
                         Console.WriteLine("\nВведите слово для удаления:");
                         var wordToRemove = Console.ReadLine();
 
-                        // Удаляем перевод, используя текущий и целевой язык
                         translator.RemoveTranslation(wordToRemove, currentLang, targetLang);
                         Console.WriteLine("Перевод удален.");
                         break;

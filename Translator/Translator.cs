@@ -13,19 +13,23 @@ namespace Translator
 
         public Translator()
         {
-            _dictionary = new Dictionary<(string word, string lang), Dictionary<string, string>>
-            {
-                { ("привет", "ru"), new Dictionary<string, string> { { "en", "hello" } } },
-                { ("мир", "ru"), new Dictionary<string, string> { { "en", "world" } } },
-                { ("друзья", "ru"), new Dictionary<string, string> { { "en", "friends" } } },
-                { ("hello", "en"), new Dictionary<string, string> { { "ru", "привет" } } },
-                { ("merci", "fr"), new Dictionary<string, string> { { "ru", "спасибо" } } },           
-            };
-
+#if DEBUG // Код для тестов будет компилироваться только в режиме отладки
+        _dictionary = new Dictionary<(string word, string lang), Dictionary<string, string>>
+        {
+            { ("привет", "ru"), new Dictionary<string, string> { { "en", "hello" } } },
+            { ("мир", "ru"), new Dictionary<string, string> { { "en", "world" } } },
+            { ("друзья", "ru"), new Dictionary<string, string> { { "en", "friends" } } },
+            { ("hello", "en"), new Dictionary<string, string> { { "ru", "привет" } } },
+            { ("merci", "fr"), new Dictionary<string, string> { { "ru", "спасибо" } } },
+        };
+#else
+            // Инициализация для Release 
+            _dictionary = new Dictionary<(string word, string lang), Dictionary<string, string>>();
+#endif
         }
 
 
-        public void AddTranslation(string firstWord, string firstLang, string secondWord, string secondLang)
+            public void AddTranslation(string firstWord, string firstLang, string secondWord, string secondLang)
         {
             var key = (firstWord.ToLower(), firstLang.ToLower());
             var reverseKey = (secondWord.ToLower(), secondLang.ToLower());
@@ -47,10 +51,7 @@ namespace Translator
         }
 
 
-        //todo
-        //1 аргумент - 1 язык для поиска
-        //2 аргумент - 2 язык для поиска
-        //результат - список всех пар из словаря, совпадающих по языкам
+
         public List<KeyValuePair<string, string>> GetListTranslationsForTwoLanguages(string sourceLang, string targetLang)
         {
             var translations = new List<KeyValuePair<string, string>>();
