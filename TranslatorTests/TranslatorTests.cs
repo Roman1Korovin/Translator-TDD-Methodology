@@ -123,7 +123,7 @@ namespace Translator.Tests
             var translator = new Translator();
 
             // Act
-            List<KeyValuePair<string, string>> translations = translator.GetTranslationsForLanguages("ru", "en");
+            List<KeyValuePair<string, string>> translations = translator.GetTranslationsForTwoLanguages("ru", "en");
 
             // Assert
             Assert.Equal(3, translations.Count);  // Убедимся, что вернулся список из 3 слов

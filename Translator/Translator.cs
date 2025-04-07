@@ -44,6 +44,22 @@ namespace Translator
 
         }
 
+
+        //todo
+        //1 аргумент - 1 язык для поиска
+        //2 аргумент - 2 язык для поиска
+        //результат - список всех пар из словаря, совпадающих по языкам
+        public List<KeyValuePair<string, string>> GetTranslationsForTwoLanguages(string sourceLang, string targetLang)
+        {
+            var translations = new List<KeyValuePair<string, string>>
+            {
+            new KeyValuePair<string, string>("привет", "hello"),
+            new KeyValuePair<string, string>("мир", "world"),
+            new KeyValuePair<string, string>("друзья", "friends")
+            };
+            return translations;
+        }
+
         //todo
         //функция обратного удаления
         public void RemoveTranslation(string word, string wordLang, string targetLang)
