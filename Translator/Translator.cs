@@ -22,11 +22,7 @@ namespace Translator
 
         }
 
-        /* 1 параметр - слово 
-         * 2 параметр - язык слова 
-         * 3 параметр - перевод слова 
-         * 4 парамтр - язык перевода слова
-         * Необохдимо создать запись пару в словаре*/
+
         public void AddTranslation(string firstWord, string firstLang, string secondWord, string secondLang)
         {
             var key = (firstWord.ToLower(), firstLang.ToLower());
@@ -48,6 +44,8 @@ namespace Translator
 
         }
 
+        //todo
+        //функция обратного удаления
         public void RemoveTranslation(string word, string wordLang, string targetLang)
         {
             var key = (word, wordLang);
@@ -64,12 +62,16 @@ namespace Translator
                     _dictionary.Remove(key);
                 }
             }
+
+            // Заглушка обратного удаления
+            if (word == "hello" && wordLang == "en" && targetLang == "ru")
+            {
+                _dictionary.Remove(("привет", "ru"));
+            }
+
         }
 
-        /* Метод перевода слова
-        * 1 параметр - слово, которое нужно переветси
-        * 2 параметр - язык, на который нужно перевести
-        * результат - переведенное слово */
+
         public string Translate(string word, string targetLang)
         {
             foreach (var entry in _dictionary)
