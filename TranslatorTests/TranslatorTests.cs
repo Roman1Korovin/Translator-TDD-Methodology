@@ -99,7 +99,7 @@ namespace Translator.Tests
         public void RemoveTranslation_ReturnsNull_ForReverseTranslate_AfterRemovingHelloAndPrivet()
         {
             // Arrange
-            var translator = new Translator();
+            var translator = new Translator();        
             var word = "hello";
             var wordLang = "en";
             var translationWord = "привет";
@@ -113,5 +113,23 @@ namespace Translator.Tests
             Assert.Null(result);
         }
 
+    }
+    public class ShowAllTranslationsTests
+    {
+        [Fact]
+        public void GetTranslationListForTwoLanguages_ReturnsCorrectList()
+        {
+            // Arrange
+            var translator = new Translator();
+
+            // Act
+            List<KeyValuePair<string, string>> translations = translator.GetTranslationsForLanguages("ru", "en");
+
+            // Assert
+            Assert.Equal(3, translations.Count);  // Убедимся, что вернулся список из 3 слов
+            Assert.Contains(translations, t => t.Key == "привет" && t.Value == "hello");
+            Assert.Contains(translations, t => t.Key == "мир" && t.Value == "world");
+            Assert.Contains(translations, t => t.Key == "друзья" && t.Value == "friends");
+        }
     }
 }
