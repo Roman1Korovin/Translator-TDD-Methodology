@@ -16,6 +16,7 @@ namespace Translator
             _dictionary = new Dictionary<(string word, string lang), Dictionary<string, string>>
             {
                 { ("привет", "ru"), new Dictionary<string, string> { { "en", "hello" } } },
+                { ("hello", "en"), new Dictionary<string, string> { { "ru", "привет" } } },
                 { ("merci", "fr"), new Dictionary<string, string> { { "ru", "спасибо" } } },
             };
 
@@ -47,11 +48,29 @@ namespace Translator
 
         }
 
-        /* Метод перевода слова
-        * 1 параметр - слово, которое нужно переветси
-        * 2 параметр - язык, на который нужно перевести
-        * результат - переведенное слово */
-        public string Translate(string word, string targetLang)
+        public void RemoveTranslation(string word, string wordLang, string targetLang)
+        {
+            var key = (word, wordLang);
+
+            // Проверяем, есть ли такая запись в словаре
+            if (_dictionary.TryGetValue(key, out var translations))
+            {
+                // Удаляем перевод на нужный язык
+                translations.Remove(targetLang);
+
+                // Если не осталось переводов удаляем всю запись
+                if (translations.Count == 0)
+                {
+                    _dictionary.Remove(key);
+                }
+            }
+        }
+
+            /* Метод перевода слова
+            * 1 параметр - слово, которое нужно переветси
+            * 2 параметр - язык, на который нужно перевести
+            * результат - переведенное слово */
+            public string Translate(string word, string targetLang)
         {
                 foreach (var entry in _dictionary)
                 {
@@ -63,7 +82,7 @@ namespace Translator
                         }
                     }
                 }
-            return $"[Перевод не найден для '{word}' → '{targetLang}']";
+            return null;
         }
     }
 }
