@@ -32,10 +32,10 @@ namespace Translator.Tests
             Assert.Equal("спасибо", result);
         }
     }
-    public class AddTranslatation
+    public class AddTranslatationTests
     {
         [Fact]
-        public void AddTranslation_HlebAndBread_TranslateFromRussianToEnglish()
+        public void AddTranslation_ReturnsEnglishWord_WhenRussianTranslationExists()
         {
             // Arrange
             var translator = new Translator();
@@ -56,7 +56,7 @@ namespace Translator.Tests
         }
 
         [Fact]
-        public void AddTranslation_HlebAndBread_TranslateFromEnglishToRussion()
+        public void AddTranslation_ReturnsRussianWord_WhenEnglishTranslationExists()
         {
             // Arrange
             var translator = new Translator();
@@ -75,5 +75,26 @@ namespace Translator.Tests
             // Assert
             Assert.Equal(ruWord, translatedInRu);
         }
+    }
+
+    public class RemoveTranslatationTests
+    {
+        [Fact]
+        public void RemoveTranslation_ReturnsNull_AfterRemovingHelloAndPrivet()
+        {
+            // Arrange
+            var translator = new Translator();
+            var word = "hello";
+            var wordLang = "en";
+            var translationLang = "ru";
+
+            // Act
+            translator.RemoveTranslation(word, wordLang, translationLang);
+            var result = translator.Translate(word, translationLang);
+
+            // Assert
+            Assert.Null(result);
+        }
+
     }
 }
