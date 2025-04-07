@@ -60,31 +60,34 @@ namespace Translator
             return translations;
         }
 
-        //todo
-        //функция обратного удаления
         public void RemoveTranslation(string word, string wordLang, string targetLang)
         {
-            var key = (word, wordLang);
+            var key = (word.ToLower(), wordLang.ToLower());  // Ключ для прямого перевода
+            var reverseKey = (Translate(word, targetLang.ToLower()), targetLang.ToLower());  // Ключ для обратного перевода
 
             // Проверяем, есть ли такая запись в словаре
             if (_dictionary.TryGetValue(key, out var translations))
             {
                 // Удаляем перевод на нужный язык
-                translations.Remove(targetLang);
+                translations.Remove(targetLang.ToLower());
 
-                // Если не осталось переводов удаляем всю запись
+                // Если не осталось переводов, удаляем всю запись
                 if (translations.Count == 0)
                 {
                     _dictionary.Remove(key);
                 }
             }
 
-            // Заглушка обратного удаления
-            if (word == "hello" && wordLang == "en" && targetLang == "ru")
+            // Обратное удаление
+            if (_dictionary.TryGetValue(reverseKey, out var reverseTranslations))
             {
-                _dictionary.Remove(("привет", "ru"));
-            }
+                reverseTranslations.Remove(wordLang.ToLower());
 
+                if (reverseTranslations.Count == 0)
+                {
+                    _dictionary.Remove(reverseKey);
+                }
+            }
         }
 
 
